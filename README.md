@@ -11,8 +11,11 @@ Tool Kit for developers
 
 ## Introduction
 - Converters
+  - Properties <> YAML
   - JSON <> YAML
   - Timestamp
+- Network
+  - Current IP
 - Serurity
   - Spring BCryptPassword
 - Generators

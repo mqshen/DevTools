@@ -7,6 +7,7 @@ toolchain go1.22.0
 require (
 	github.com/adrg/sysfont v0.1.2
 	github.com/andybalholm/brotli v1.1.0
+	github.com/deckarep/golang-set/v2 v2.6.0
 	github.com/klauspost/compress v1.17.7
 	github.com/vmihailenco/msgpack/v5 v5.4.1
 	github.com/vrischmann/userdir v0.0.0-20151206171402-20f291cebd68

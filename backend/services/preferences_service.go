@@ -25,11 +25,11 @@ type preferencesService struct {
 var preferences *preferencesService
 var oncePreferences sync.Once
 
-func Preferences() *preferencesService {
+func Preferences(pref *storage2.PreferencesStorage) *preferencesService {
 	if preferences == nil {
 		oncePreferences.Do(func() {
 			preferences = &preferencesService{
-				pref:          storage2.NewPreferences(),
+				pref:          pref,
 				clientVersion: "",
 			}
 		})

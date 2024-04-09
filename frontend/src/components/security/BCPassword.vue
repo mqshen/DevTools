@@ -11,7 +11,6 @@ const model = ref({
 
 const generatePassword = () => {
     GenerateBCPassword(model.value.content).then((resp) => {
-      console.log(resp);
       if (resp.success) {
         model.value.password = resp.data;
       }
@@ -44,8 +43,5 @@ onMounted(() => {
 <style scoped>
 .n-grid {
   height: 100%;
-}
-.convertor-container {
-  overflow: scroll;
 }
 </style>

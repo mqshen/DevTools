@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"devtools/backend/types"
+	"encoding/json"
 	"fmt"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 	"gopkg.in/yaml.v3"
@@ -51,6 +52,56 @@ func YamlConvertor() *yamlService {
 
 func (p *yamlService) Start(ctx context.Context) {
 	p.ctx = ctx
+}
+
+func (p *yamlService) ConvertFromJSON(content string) (resp types.JSResp) {
+	var data map[string]interface{}
+	err := json.Unmarshal([]byte(content), &data)
+	if err != nil {
+		resp.Msg = err.Error()
+		return
+	}
+	yamlContent, err := yaml.Marshal(data)
+	if err != nil {
+		resp.Msg = err.Error()
+		return
+	}
+	jsonContent, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		resp.Msg = err.Error()
+		return
+	}
+	resp.Data = map[string]any{
+		"yamlContent": string(yamlContent),
+		"jsonContent": string(jsonContent),
+	}
+	resp.Success = true
+	return
+}
+
+func (p *yamlService) ConvertToJSON(content string) (resp types.JSResp) {
+	var data map[string]interface{}
+	err := yaml.Unmarshal([]byte(content), &data)
+	if err != nil {
+		resp.Msg = err.Error()
+		return
+	}
+	yamlContent, err := yaml.Marshal(data)
+	if err != nil {
+		resp.Msg = err.Error()
+		return
+	}
+	jsonContent, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		resp.Msg = err.Error()
+		return
+	}
+	resp.Data = map[string]any{
+		"yamlContent": string(yamlContent),
+		"jsonContent": string(jsonContent),
+	}
+	resp.Success = true
+	return
 }
 
 func (p *yamlService) ConvertFromProperties(properties string) (resp types.JSResp) {

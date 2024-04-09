@@ -40,6 +40,11 @@ func (p *PreferencesStorage) getPreferences() (ret types.Preferences) {
 	return
 }
 
+func (p *PreferencesStorage) GetLang() string {
+	preferences := p.getPreferences()
+	return preferences.General.Language
+}
+
 // GetPreferences Get preferences from local
 func (p *PreferencesStorage) GetPreferences() (ret types.Preferences) {
 	p.mutex.Lock()

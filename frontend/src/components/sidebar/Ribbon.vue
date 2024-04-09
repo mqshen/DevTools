@@ -13,23 +13,32 @@ const data = ref([
     type: 0,
     children: [
       { key: "00", type: 1, name: "Properties<>Yaml", compontent: componentTypes.PROPERTIES },
-      { key: "01", type: 1, name: "Date", compontent: componentTypes.Date },
+      { key: "01", type: 1, name: "JSON<>Yaml", compontent: componentTypes.JSON},
+      { key: "02", type: 1, name: "Date", compontent: componentTypes.Date },
     ],
   },
   {
     key: "1",
+    name: "Network",
+    type: 0,
+    children: [
+      { key: "10", type: 1, name: "IP", compontent: componentTypes.IP},
+    ],
+  },,
+  {
+    key: "2",
     name: "Security",
     type: 0,
     children: [
-      { key: "10", type: 1, name: "BCryptPassword", compontent: componentTypes.BCryptPassword },
+      { key: "20", type: 1, name: "BCryptPassword", compontent: componentTypes.BCryptPassword },
     ],
   },
   {
-    key: "2",
+    key: "3",
     name: "Generators",
     type: 0,
     children: [
-      { key: "20", type: 1, name: "Hash", compontent: componentTypes.Hash },
+      { key: "30", type: 1, name: "Hash", compontent: componentTypes.Hash },
     ],
   }
 ]);
@@ -56,7 +65,7 @@ const renderPrefix = ({ option }) => {
 const renderSwitcherIcon = ({ option }) => {
   return null;
 };
-const defaultExpandedKeys = ref(["0", "1", "2"]);
+const defaultExpandedKeys = ref(["0", "1", "2", "3"]);
 
 const handleClick = ({ option }) => {
   if (option.type == 1) {

@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"devtools/backend/services"
+	"devtools/backend/storage"
 	"embed"
 	"github.com/wailsapp/wails/v2/pkg/menu"
 	"github.com/wailsapp/wails/v2/pkg/options/mac"
@@ -28,10 +29,14 @@ func main() {
 	//connSvc := services.Connection()
 	//topicSvc := services.Topic()
 	//browserSvc := services.Browser()
-	prefSvc := services.Preferences()
+	pref := storage.NewPreferences()
+	prefSvc := services.Preferences(pref)
 	yamlConvertor := services.YamlConvertor()
 	securitySvc := services.Securities()
 	hashService := services.HashGenerator()
+
+	settings := storage.NewSettings()
+	ipService := services.IPServices(settings, pref)
 	//
 	prefSvc.SetAppVersion(version)
 	windowWidth, windowHeight, maximised := prefSvc.GetWindowSize()
@@ -61,16 +66,7 @@ func main() {
 		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
 		OnStartup: func(ctx context.Context) {
 			yamlConvertor.Start(ctx)
-			//sysSvc.Start(ctx, version)
-			//connSvc.Start(ctx)
-			//topicSvc.Start(ctx)
-			//browserSvc.Start(ctx)
-			//cliSvc.Start(ctx)
-			//monitorSvc.Start(ctx)
-			//pubsubSvc.Start(ctx)
-			//
-			//services.GA().SetSecretKey(gaMeasurementID, gaSecretKey)
-			//services.GA().Startup(version)
+			ipService.Start(ctx)
 		},
 		OnDomReady: func(ctx context.Context) {
 			x, y := prefSvc.GetWindowPosition(ctx)
@@ -83,16 +79,13 @@ func main() {
 			return false
 		},
 		OnShutdown: func(ctx context.Context) {
-			//browserSvc.Stop()
-			//cliSvc.CloseAll()
-			//monitorSvc.StopAll()
-			//pubsubSvc.StopAll()
 		},
 		Bind: []interface{}{
 			prefSvc,
 			securitySvc,
 			yamlConvertor,
 			hashService,
+			ipService,
 		},
 		Mac: &mac.Options{
 			TitleBar: mac.TitleBarHiddenInset(),

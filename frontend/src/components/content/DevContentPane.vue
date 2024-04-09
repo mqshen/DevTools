@@ -2,9 +2,11 @@
 import { componentTypes } from "@/consts/support_component_type";
 import { useThemeVars } from "naive-ui";
 import PropertiesConvert from "@/components/convert/PropertiesConvert.vue";
+import JSONConvert from "@/components/convert/JSONConvert.vue";
 import DateConvert from "@/components/convert/DateConvert.vue";
 import BCPassword from "@/components/security/BCPassword.vue";
 import HashGenerator from "@/components/generators/HashGenerator.vue";
+import IPComponent from "@/components/network/IPComponent.vue";
 const themeVars = useThemeVars();
 
 const props = defineProps({
@@ -13,14 +15,16 @@ const props = defineProps({
 
 const valueComponents = {
   [componentTypes.PROPERTIES]: PropertiesConvert,
+  [componentTypes.JSON]: JSONConvert,
   [componentTypes.Date]: DateConvert,
   [componentTypes.BCryptPassword]: BCPassword,
   [componentTypes.Hash]: HashGenerator,
+  [componentTypes.IP]: IPComponent,
 };
 </script>
 
 <template>
-  <div class="content-container flex-box-v">
+  <div :class="'content-container flex-box-v '+ componentType + '_container'">
     <component :is="valueComponents[componentType]" />
   </div>
 </template>
@@ -43,5 +47,9 @@ const valueComponents = {
 }
 .content-container {
   padding: 20px;
+}
+.IP_container.content-container {
+  padding: 20px;
+  overflow-y: auto;
 }
 </style>

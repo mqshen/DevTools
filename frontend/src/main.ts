@@ -1,6 +1,7 @@
 import { createPinia } from 'pinia'
 import { createApp, nextTick } from 'vue'
 import './style/style.scss'
+import "bootstrap-icons/font/bootstrap-icons.css"
 import App from './App.vue'
 import { i18n } from '@/utils/i18n'
 import { loadEnvironment } from '@/utils/platform'

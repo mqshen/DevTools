@@ -61,7 +61,4 @@ onMounted(() => {
 .n-grid {
   height: 100%;
 }
-.convertor-container {
-  overflow: scroll;
-}
 </style>

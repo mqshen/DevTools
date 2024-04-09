@@ -36,6 +36,40 @@ function setupNotification(notification: NotificationApi) {
 }
 
 /**
+ *
+ * @param {DialogApiInjection} dialog
+ * @return {*}
+ */
+function setupDialog(dialog) {
+    return {
+        /**
+         * @param {DialogOptions} option
+         * @return {DialogReactive}
+         */
+        show(option) {
+            option.closable = option.closable === true
+            option.autoFocus = option.autoFocus === true
+            option.transformOrigin = 'center'
+            return dialog.create(option)
+        },
+        warning: (content, onConfirm) => {
+            return dialog.warning({
+                title: i18nGlobal.t('common.warning'),
+                content: content,
+                closable: false,
+                autoFocus: false,
+                transformOrigin: 'center',
+                positiveText: i18nGlobal.t('common.confirm'),
+                negativeText: i18nGlobal.t('common.cancel'),
+                onPositiveClick: () => {
+                    onConfirm && onConfirm()
+                },
+            })
+        },
+    }
+}
+
+/**
  * setup discrete api and bind global component (like dialog, message, alert) to window
  * @return {Promise<void>}
  */
@@ -67,5 +101,6 @@ export async function setupDiscreteApi() {
 
     const $notification = setupNotification(notification)
     window.$notification = $notification 
+    window.$dialog = setupDialog(dialog)
     return $notification
 }

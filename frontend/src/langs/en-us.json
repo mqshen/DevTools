@@ -1,1 +1,12 @@
-{}
+{
+    "common": {
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "success": "Success",
+        "warning": "Warning",
+        "error": "Error"
+    },
+    "dialogue": {
+      "close_confirm": "Close this connection ({name})?"
+    }
+}

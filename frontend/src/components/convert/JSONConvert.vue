@@ -1,36 +1,43 @@
 <script setup lang="ts">
 import {
-  ConvertFromProperties,
-  ConvertToProperties,
+  ConvertFromJSON,
+  ConvertToJSON,
 } from "wailsjs/go/services/yamlService.js";
-import { ref, computed, reactive, onBeforeMount } from "vue";
+import { ref, computed } from "vue";
 import { Codemirror } from "vue-codemirror";
+import { json } from "@codemirror/lang-json";
 import { yaml } from "@codemirror/lang-yaml";
 
-const properties = ref("");
+const jsonContent = ref("");
 const yamlContent = ref("");
 const doConvert = (isProperties: boolean, content: string) => {
   if (isProperties) {
-    ConvertFromProperties(content).then((resp) => {
+    ConvertFromJSON(content).then((resp) => {
       if (resp.success) {
-        yamlContent.value = resp.data;
+        yamlContent.value = resp.data.yamlContent;
+        jsonContent.value = resp.data.jsonContent;
       }
     });
   } else {
-    ConvertToProperties(content).then((resp) => {
+    ConvertToJSON(content).then((resp) => {
       if (resp.success) {
-        properties.value = resp.data;
+        yamlContent.value = resp.data.yamlContent;
+        jsonContent.value = resp.data.jsonContent;
       }
     });
   }
 };
 
+const jsonExtensions = computed(() => {
+  const result = [];
+  result.push(json());
+  return result;
+});
 const yamlExtensions = computed(() => {
   const result = [];
   result.push(yaml());
   return result;
 });
-
 </script>
 
 <template>
@@ -41,8 +48,9 @@ const yamlExtensions = computed(() => {
   <n-grid x-gap="12" :cols="2">
     <n-gi class="convertor-container">
       <codemirror
-        v-model="properties"
-        placeholder="properties"
+        v-model="jsonContent"
+        placeholder="json"
+        :extensions="jsonExtensions"
         :style="{ height: '100%' }"
         :autofocus="true"
         :indent-with-tab="true"
@@ -53,7 +61,7 @@ const yamlExtensions = computed(() => {
     <n-gi class="convertor-container">
       <codemirror
         v-model="yamlContent"
-        placeholder="yaml"
+        placeholder="yamlContent"
         :extensions="yamlExtensions"
         :style="{ height: '100%' }"
         :autofocus="true"

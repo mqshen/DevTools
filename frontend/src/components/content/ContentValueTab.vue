@@ -27,7 +27,7 @@ const onCloseTab = (tabIndex) => {
     $dialog.warning(
       i18n.t("dialogue.close_confirm", { name: tab.name }),
       () => {
-        // browserStore.closeConnection(tab.name)
+        tabStore.closeTab(tab.name)
       }
     );
   }
@@ -36,7 +36,6 @@ const onCloseTab = (tabIndex) => {
 
 
 const tabClass = (idx: number) => {
-  console.log(idx, tabStore.activatedIndex)
   if (tabStore.activatedIndex === idx) {
     return [
       "value-tab",

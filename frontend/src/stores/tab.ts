@@ -39,7 +39,40 @@ const usePreferencesStore = defineStore('tab', {
             }
             this._setActivatedIndex(tabIndex)
 
-        }
+        },
+        closeTab(name: string) {
+            const idx = this.tabs.findIndex((item: TabItem) => item.name === name)
+            if (idx !== -1) {
+                this.removeTab(idx)
+            }
+        },
+        /**
+         *
+         * @param {number} tabIndex
+         * @returns {*|null}
+         */
+        removeTab(tabIndex: number) {
+            const len = this.tabs.length
+
+            if (tabIndex < 0 || tabIndex >= len) {
+                return null
+            }
+            const removed = this.tabList.splice(tabIndex, 1)
+
+            // update select index if removed index equal current selected
+            this.activatedIndex -= 1
+            if (this.activatedIndex < 0) {
+                if (this.tabList.length > 0) {
+                    this._setActivatedIndex(0)
+                } else {
+                    this._setActivatedIndex(-1)
+                }
+            } else {
+                this._setActivatedIndex(this.activatedIndex)
+            }
+
+            return removed.length > 0 ? removed[0] : null
+        },
     }
 
 })
