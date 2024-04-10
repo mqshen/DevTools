@@ -12,7 +12,6 @@ const model = ref({
 
 const generateHash = () => {
   GenerateHash(model.value.input).then((resp) => {
-    console.log(resp);
     if (resp.success) {
       const { md5, sha1, sha256, sha512 } = resp.data;
       model.value.md5 = md5;

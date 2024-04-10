@@ -52,7 +52,7 @@ const tab = computed(() =>
   tabStore.tabs.map((item) => {
     return {
       name: item.name,
-      icon: item.compontent,
+      icon: item.icon,
     };
   })
 );
@@ -95,9 +95,10 @@ const exThemeVars = computed(() => {
         inline
         justify="center"
       >
-        <n-icon size="18">
-          <component :is="iconComponents[t.icon]" />
-        </n-icon>
+      <i :class="'bi bi-' + t.icon"/>
+        <!-- <n-icon size="18"> -->
+          <!-- <component :is="iconComponents[t.icon]" /> -->
+        <!-- </n-icon> -->
         <n-ellipsis style="max-width: 150px">{{ t.name }}</n-ellipsis>
       </n-space>
     </n-tab>

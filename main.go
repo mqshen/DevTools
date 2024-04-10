@@ -24,16 +24,12 @@ var icon []byte
 var version = "0.0.0"
 
 func main() {
-	// Create an instance of the app structure
-	//sysSvc := services.System()
-	//connSvc := services.Connection()
-	//topicSvc := services.Topic()
-	//browserSvc := services.Browser()
 	pref := storage.NewPreferences()
 	prefSvc := services.Preferences(pref)
 	yamlConvertor := services.YamlConvertor()
 	securitySvc := services.Securities()
 	hashService := services.HashGenerator()
+	encodeSvc := services.EncodeService()
 
 	settings := storage.NewSettings()
 	ipService := services.IPServices(settings, pref)
@@ -86,6 +82,7 @@ func main() {
 			yamlConvertor,
 			hashService,
 			ipService,
+			encodeSvc,
 		},
 		Mac: &mac.Options{
 			TitleBar: mac.TitleBarHiddenInset(),

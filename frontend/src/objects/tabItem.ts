@@ -3,14 +3,16 @@
  */
 export class TabItem {
     name: string
-    compontent: Object
+    compontent: string
+    icon: string
 
     /**
      *
      * @param {string} name connection name
      */
-    constructor(name: string, compontent: string) {
+    constructor(name: string, compontent: string, icon: string) {
         this.name = name
         this.compontent = compontent
+        this.icon = icon
     }
 }

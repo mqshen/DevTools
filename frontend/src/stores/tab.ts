@@ -30,10 +30,10 @@ const usePreferencesStore = defineStore('tab', {
         _setActivatedIndex(idx: number) {
             this.activatedIndex = idx
         },
-        upsertTab(name: string, compontent: Object) {
+        upsertTab(name: string, compontent: string, icon: string) {
             let tabIndex = this.tabList.findIndex((item: TabItem) => item.name === name)
             if (tabIndex === -1) {
-                const tabItem = new TabItem(name, compontent)
+                const tabItem = new TabItem(name, compontent, icon)
                 this.tabList.push(tabItem)
                 tabIndex = this.tabList.length - 1
             }

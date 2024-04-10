@@ -20,6 +20,12 @@ Tool Kit for developers
   - Spring BCryptPassword
 - Generators
   - Hash
+- Encoders / Decoders
+  - HTML
+  - URL
+  - Base64 Text & Image
+  - GZip
+  - JWT Decoder
 
 ## Build Guidelines
 

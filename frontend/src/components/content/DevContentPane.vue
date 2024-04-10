@@ -7,6 +7,10 @@ import DateConvert from "@/components/convert/DateConvert.vue";
 import BCPassword from "@/components/security/BCPassword.vue";
 import HashGenerator from "@/components/generators/HashGenerator.vue";
 import IPComponent from "@/components/network/IPComponent.vue";
+import HTMLEncoder from "@/components/encoder/HTMLEncoder.vue";
+import Base64Encoder from "@/components/encoder/Base64Encoder.vue";
+import JWTEncoder from "@/components/encoder/JWTEncoder.vue";
+import URLEncoder from "@/components/encoder/URLEncoder.vue";
 const themeVars = useThemeVars();
 
 const props = defineProps({
@@ -20,6 +24,10 @@ const valueComponents = {
   [componentTypes.BCryptPassword]: BCPassword,
   [componentTypes.Hash]: HashGenerator,
   [componentTypes.IP]: IPComponent,
+  [componentTypes.HTML]: HTMLEncoder,
+  [componentTypes.Base64]: Base64Encoder,
+  [componentTypes.JWT]: JWTEncoder,
+  [componentTypes.URL]: URLEncoder,
 };
 </script>
 
