@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { EncodeFromJWT } from "wailsjs/go/services/encodeService.js";
 import { types } from "wailsjs/go/models";
-import { ref, computed } from "vue";
+import { ref, onMounted } from "vue";
 
-const decodedContent = ref("");
+const decodedContent = ref("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
 const header = ref("");
 const payload = ref("");
-const doEncode = (content: string) => {
+const doEncode = () => {
+  const content = decodedContent.value
   EncodeFromJWT(content).then((resp: types.JSResp) => {
     console.log(resp)
     if (resp.success) {
@@ -16,9 +17,12 @@ const doEncode = (content: string) => {
     else {
       header.value = resp.msg;
     }
-
   });
 };
+
+onMounted(() => {
+  doEncode()
+})
 </script>
 
 <template>

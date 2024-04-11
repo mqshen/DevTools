@@ -7,6 +7,7 @@ import DateConvert from "@/components/convert/DateConvert.vue";
 import BCPassword from "@/components/security/BCPassword.vue";
 import HashGenerator from "@/components/generators/HashGenerator.vue";
 import IPComponent from "@/components/network/IPComponent.vue";
+import TraceRouteComponent from "@/components/network/TraceRouteComponent.vue";
 import HTMLEncoder from "@/components/encoder/HTMLEncoder.vue";
 import Base64Encoder from "@/components/encoder/Base64Encoder.vue";
 import JWTEncoder from "@/components/encoder/JWTEncoder.vue";
@@ -24,6 +25,7 @@ const valueComponents = {
   [componentTypes.BCryptPassword]: BCPassword,
   [componentTypes.Hash]: HashGenerator,
   [componentTypes.IP]: IPComponent,
+  [componentTypes.TraceRoute]: TraceRouteComponent,
   [componentTypes.HTML]: HTMLEncoder,
   [componentTypes.Base64]: Base64Encoder,
   [componentTypes.JWT]: JWTEncoder,
@@ -56,8 +58,11 @@ const valueComponents = {
 .content-container {
   padding: 20px;
 }
-.IP_container.content-container {
+.IP_container, .TraceRoute_container{
+
+&.content-container {
   padding: 20px;
   overflow-y: auto;
+}
 }
 </style>

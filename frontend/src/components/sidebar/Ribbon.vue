@@ -23,6 +23,7 @@ const data = ref([
     type: 0,
     children: [
       { key: "10", type: 1, name: "IP", compontent: componentTypes.IP, icon: "modem"},
+      { key: "11", type: 1, name: "Trace Route", compontent: componentTypes.TraceRoute, icon: "router"},
     ],
   },,
   {

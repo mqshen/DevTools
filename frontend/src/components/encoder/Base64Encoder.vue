@@ -4,24 +4,29 @@ import {
   DecodeFromBase64,
 } from "wailsjs/go/services/encodeService.js";
 import {types} from 'wailsjs/go/models';
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 
-const decodedContent = ref("");
+const decodedContent = ref("hello world");
 const encodedContent = ref("");
-const doEncode = (content: string) => {
+const doEncode = () => {
+  const content = decodedContent.value
   EncodeFromBase64(content).then((resp: types.JSResp) => {
       if (resp.success) {
         encodedContent.value = resp.data;
       }
     });
 };
-const doDecode = (content: string) => {
+const doDecode = () => {
+  const content = encodedContent.value
   DecodeFromBase64(content).then((resp: types.JSResp) => {
       if (resp.success) {
         decodedContent.value = resp.data;
       }
     });
 };
+onMounted(() => {
+  doEncode()
+})
 </script>
 
 <template>

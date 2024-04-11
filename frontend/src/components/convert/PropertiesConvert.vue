@@ -3,21 +3,28 @@ import {
   ConvertFromProperties,
   ConvertToProperties,
 } from "wailsjs/go/services/yamlService.js";
-import { ref, computed, reactive, onBeforeMount } from "vue";
+import { types } from "wailsjs/go/models";
+import { ref, computed, onMounted } from "vue";
 import { Codemirror } from "vue-codemirror";
 import { yaml } from "@codemirror/lang-yaml";
 
-const properties = ref("");
+const properties = ref(`spring.datasource.url=abc
+spring.datasource.username=alice
+spring.datasource.password=123456
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.type=com.zaxxer.hikari.HikariDataSource`);
 const yamlContent = ref("");
-const doConvert = (isProperties: boolean, content: string) => {
+const doConvert = (isProperties: boolean) => {
   if (isProperties) {
-    ConvertFromProperties(content).then((resp) => {
+    const content = properties.value
+    ConvertFromProperties(content).then((resp: types.JSResp) => {
       if (resp.success) {
         yamlContent.value = resp.data;
       }
     });
   } else {
-    ConvertToProperties(content).then((resp) => {
+    const content = yamlContent.value
+    ConvertToProperties(content).then((resp: types.JSResp) => {
       if (resp.success) {
         properties.value = resp.data;
       }
@@ -30,6 +37,10 @@ const yamlExtensions = computed(() => {
   result.push(yaml());
   return result;
 });
+
+onMounted(() => {
+  doConvert(true)
+})
 
 </script>
 

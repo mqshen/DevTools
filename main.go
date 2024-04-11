@@ -30,6 +30,7 @@ func main() {
 	securitySvc := services.Securities()
 	hashService := services.HashGenerator()
 	encodeSvc := services.EncodeService()
+	traceRouteSvc := services.TraceRouter()
 
 	settings := storage.NewSettings()
 	ipService := services.IPServices(settings, pref)
@@ -63,6 +64,7 @@ func main() {
 		OnStartup: func(ctx context.Context) {
 			yamlConvertor.Start(ctx)
 			ipService.Start(ctx)
+			traceRouteSvc.Start(ctx)
 		},
 		OnDomReady: func(ctx context.Context) {
 			x, y := prefSvc.GetWindowPosition(ctx)
@@ -83,6 +85,7 @@ func main() {
 			hashService,
 			ipService,
 			encodeSvc,
+			traceRouteSvc,
 		},
 		Mac: &mac.Options{
 			TitleBar: mac.TitleBarHiddenInset(),

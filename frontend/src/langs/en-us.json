@@ -8,5 +8,8 @@
     },
     "dialogue": {
       "close_confirm": "Close this connection ({name})?"
+    },
+    "network":{
+      "private": "Private"
     }
 }

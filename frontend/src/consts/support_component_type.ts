@@ -9,6 +9,7 @@ export const componentTypes = {
     Hash: 'Hash',
     Date: 'Date',
     IP: 'IP',
+    TraceRoute: 'TraceRoute',
     QRCodeReader: 'QRCodeReader',
     HTML: 'HTMLEncoder',
     URL: 'URLEncoder',

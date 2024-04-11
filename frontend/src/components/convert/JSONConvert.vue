@@ -3,23 +3,47 @@ import {
   ConvertFromJSON,
   ConvertToJSON,
 } from "wailsjs/go/services/yamlService.js";
-import { ref, computed } from "vue";
+import { types } from "wailsjs/go/models";
+import { ref, computed, onMounted } from "vue";
 import { Codemirror } from "vue-codemirror";
 import { json } from "@codemirror/lang-json";
 import { yaml } from "@codemirror/lang-yaml";
 
-const jsonContent = ref("");
+const jsonContent = ref(`{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+						"GlossSeeAlso": ["GML", "XML"]
+                    },
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+}`);
 const yamlContent = ref("");
-const doConvert = (isProperties: boolean, content: string) => {
-  if (isProperties) {
-    ConvertFromJSON(content).then((resp) => {
+const doConvert = (isJson: boolean) => {
+  if (isJson) {
+    const content = jsonContent.value
+    ConvertFromJSON(content).then((resp: types.JSResp) => {
       if (resp.success) {
         yamlContent.value = resp.data.yamlContent;
         jsonContent.value = resp.data.jsonContent;
       }
     });
   } else {
-    ConvertToJSON(content).then((resp) => {
+    const content = yamlContent.value
+    ConvertToJSON(content).then((resp: types.JSResp) => {
       if (resp.success) {
         yamlContent.value = resp.data.yamlContent;
         jsonContent.value = resp.data.jsonContent;
@@ -38,6 +62,9 @@ const yamlExtensions = computed(() => {
   result.push(yaml());
   return result;
 });
+onMounted(() => {
+  doConvert(true)
+})
 </script>
 
 <template>
