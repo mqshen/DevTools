@@ -10,6 +10,7 @@
       "close_confirm": "Close this connection ({name})?"
     },
     "network":{
-      "private": "Private"
+      "private": "Private",
+      "no_permission": "no socket raw permission, please try run with root user"
     }
 }

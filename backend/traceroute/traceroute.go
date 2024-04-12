@@ -36,7 +36,7 @@ func (t TraceResult) MarshalJSON() (b []byte, err error) {
 		"ttl":         t.TTL,
 		"host":        t.NextHot,
 		"isPrivate":   isPrivate,
-		"elapsedTime": t.ElapsedTime / time.Microsecond,
+		"elapsedTime": fmt.Sprintf("%.2f", float64(t.ElapsedTime)/1000000.0),
 		"replied":     t.Replied,
 	}
 	return json.Marshal(result)

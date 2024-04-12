@@ -59,7 +59,9 @@ const loading = ref(false);
 const doTrace = async () => {
   loading.value = true;
   const resp = await GetTraceRoute(host.value); //.then((resp: types.JSResp) => {
-  console.log(resp);
+  if (resp.msg == "noPermission") {
+    $dialog.warning( i18n.t("network.no_permission" ));
+  }
   if (resp.success) {
     const { complete, routes } = resp.data;
     data.value = routes || [];

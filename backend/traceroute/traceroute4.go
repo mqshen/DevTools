@@ -25,7 +25,7 @@ func trace4(conf *TraceConfig, addr netip.Addr) (<-chan *TraceResult, <-chan err
 		defer unix.Close(sendSocket)
 		recvSocket, err := unix.Socket(unix.AF_INET, unix.SOCK_RAW, unix.IPPROTO_ICMP)
 		if err != nil {
-			errChan <- err
+			errChan <- fmt.Errorf("noPermission")
 			return nil
 		}
 		if err := unix.SetsockoptTimeval(recvSocket, unix.SOL_SOCKET, unix.SO_RCVTIMEO,
