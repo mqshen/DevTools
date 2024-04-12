@@ -107,7 +107,6 @@ jobs:
             --no-internet-enable \
             --volname "DevTools" \
             --volicon "bin/DevTools.app/Contents/Resources/iconfile.icns" \
-            --background "dmg/background.tiff" \
             --text-size 12 \
             --window-pos 400 400 \
             --window-size 660 450 \
@@ -115,8 +114,6 @@ jobs:
             --icon "DevTools.app" 180 180 \
             --hide-extension "DevTools.app" \
             --app-drop-link 480 180 \
-            --add-file "Repair" "dmg/fix-app" 230 290 \
-            --add-file "损坏修复" "dmg/fix-app_zh" 430 290 \
             "bin/DevTools-${{ steps.normalise_platform.outputs.tag }}.dmg" \
             "bin"
 
