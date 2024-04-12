@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name={{.Info.ProductName}}
+Exec=/usr/local/bin/DevTools %U
+Terminal=false
+Type=Application
+Icon=DevTools
+StartupWMClass=DevTools
+Comment={{.Info.Comments}}
+MimeType=x-scheme-handler/DevTools;
+Categories=Office;
