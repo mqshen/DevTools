@@ -7,7 +7,9 @@ Tool Kit for developers
 
 ## Screenshot
 ![Yaml](./screenshot/yaml.png)
+![Json](./screenshot/json.png)
 ![Hash](./screenshot/hash.png)
+![TraceRoute](./screenshot/traceroute.png)
 
 ## Introduction
 - Converters
@@ -23,8 +25,7 @@ Tool Kit for developers
 - Encoders / Decoders
   - HTML
   - URL
-  - Base64 Text & Image
-  - GZip
+  - Base64 Text
   - JWT Decoder
 
 ## Build Guidelines
