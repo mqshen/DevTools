@@ -9,5 +9,12 @@
   "author": {
     "name": "shenmq",
     "email": "shenmq@belink.com"
+  },
+  "info": {
+    "companyName": "shenmq",
+    "productName": "DevTools",
+    "productVersion": "0.0.1",
+    "copyright": "Copyright © 2024",
+    "comments": "Tool Kit for developers"
   }
 }

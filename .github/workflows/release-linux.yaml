@@ -163,9 +163,7 @@ jobs:
         run: mv "DevTools_${{ steps.normalise_version.outputs.version }}_amd64.deb" "DevTools_${{ steps.normalise_version.outputs.version }}_${{ steps.normalise_platform.outputs.tag }}.deb"
 
       - name: Rename appimage
-        run: |
-          ls
-          mv DevTools-${{ steps.normalise_platform_arch.outputs.arch }}.AppImage "DevTools_${{ steps.normalise_version.outputs.version }}_${{ steps.normalise_platform.outputs.tag }}.AppImage"
+        run: mv DevTools-${{ steps.normalise_platform_arch.outputs.arch }}.AppImage "DevTools_${{ steps.normalise_version.outputs.version }}_${{ steps.normalise_platform.outputs.tag }}.AppImage"
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
