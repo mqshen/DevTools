@@ -102,17 +102,17 @@ jobs:
         shell: bash
         working-directory: ./build
         run: |
-          mv bin/DevTools.app "bin/DevTools.app"
+          mv bin/DevTools.app "bin/Dev Tools.app"
           ./create-dmg/create-dmg \
             --no-internet-enable \
-            --volname "DevTools" \
-            --volicon "bin/DevTools.app/Contents/Resources/iconfile.icns" \
+            --volname "Dev Tools" \
+            --volicon "bin/Dev Tools.app/Contents/Resources/iconfile.icns" \
             --text-size 12 \
             --window-pos 400 400 \
             --window-size 660 450 \
             --icon-size 80 \
-            --icon "DevTools.app" 180 180 \
-            --hide-extension "DevTools.app" \
+            --icon "Dev Tools.app" 180 180 \
+            --hide-extension "Dev Tools.app" \
             --app-drop-link 480 180 \
             "bin/DevTools-${{ steps.normalise_platform.outputs.tag }}.dmg" \
             "bin"
