@@ -218,6 +218,9 @@ func (p *yamlService) yamlToMap(contentOfYaml string) (map[string]interface{}, e
 func (p *yamlService) mapToProperties(dataMap map[string]interface{}) (string, error) {
 	var propertyStrList []string
 	for key, value := range dataMap {
+		if value == nil {
+			continue
+		}
 		valueKind := reflect.TypeOf(value).Kind()
 		switch valueKind {
 		case reflect.Map:

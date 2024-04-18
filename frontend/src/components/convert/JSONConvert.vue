@@ -32,9 +32,8 @@ const jsonContent = ref(`{
     }
 }`);
 const yamlContent = ref("");
-const doConvert = (isJson: boolean) => {
+const doConvert = (isJson: boolean, content: string) => {
   if (isJson) {
-    const content = jsonContent.value
     ConvertFromJSON(content).then((resp: types.JSResp) => {
       if (resp.success) {
         yamlContent.value = resp.data.yamlContent;
@@ -42,7 +41,6 @@ const doConvert = (isJson: boolean) => {
       }
     });
   } else {
-    const content = yamlContent.value
     ConvertToJSON(content).then((resp: types.JSResp) => {
       if (resp.success) {
         yamlContent.value = resp.data.yamlContent;
@@ -63,7 +61,7 @@ const yamlExtensions = computed(() => {
   return result;
 });
 onMounted(() => {
-  doConvert(true)
+  doConvert(true, jsonContent.value)
 })
 </script>
 
