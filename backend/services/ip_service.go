@@ -77,32 +77,41 @@ func (s *ipService) GetIP() (resp types.JSResp) {
 	for ip := range ipSet.Iter() {
 		s.getIpDetail(ip)
 	}
-	ips := []*types.DevIP{
-		{
+	var ips []*types.DevIP
+	if len(taobaoIp) > 0 {
+		ips = append(ips, &types.DevIP{
 			Source:   "TaoBao",
 			IP:       taobaoIp,
 			Location: s.locationCache[taobaoIp],
-		},
-		{
+		})
+	}
+	if len(ipifyIp) > 0 {
+		ips = append(ips, &types.DevIP{
 			Source:   "IPify IPv4",
 			IP:       ipifyIp,
 			Location: s.locationCache[ipifyIp],
-		},
-		{
+		})
+	}
+	if len(upaiIp) > 0 {
+		ips = append(ips, &types.DevIP{
 			Source:   "UPaiYun",
 			IP:       upaiIp,
 			Location: s.locationCache[upaiIp],
-		},
-		{
+		})
+	}
+	if len(cloudFlareIp) > 0 {
+		ips = append(ips, &types.DevIP{
 			Source:   "CloudFlare IPv4",
 			IP:       cloudFlareIp,
 			Location: s.locationCache[cloudFlareIp],
-		},
-		{
+		})
+	}
+	if len(ipIp) > 0 {
+		ips = append(ips, &types.DevIP{
 			Source:   "IPIP",
 			IP:       ipIp,
 			Location: s.locationCache[ipIp],
-		},
+		})
 	}
 	resp.Data = map[string]any{
 		"ips": ips,
@@ -116,6 +125,10 @@ func (s *ipService) getTaobaoResult() string {
 	response, err := http.Get(url)
 	if err != nil {
 		runtime.LogErrorf(s.ctx, "get ip from taobao failed %s", err.Error())
+		return ""
+	}
+	if response.StatusCode != http.StatusOK {
+		runtime.LogErrorf(s.ctx, "get ip from taobao error %s", response.Status)
 		return ""
 	}
 	//var data map[string]string
